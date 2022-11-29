@@ -1,0 +1,69 @@
+//colors
+$data: hsl(0, 0%, 17%);
+$headers: hsl(0, 0%, 59%);
+$white: hsl(0, 0%, 100%);
+$black: hsl(0, 0%, 0%);
+$error: hsl(0, 48%, 9%);
+
+//Light Theme
+$VeryLightGray: hsl(0, 0%, 98%);
+$VeryLightGrayishBlue: hsl(236, 33%, 92%);
+$LightGrayishBlue: hsl(233, 11%, 84%);
+$DarkGrayishBlue: hsl(236, 9%, 61%);
+$VeryDarkGrayishBlue: hsl(235, 19%, 35%);
+
+//Dark Theme
+$VeryDarkBlue: hsl(235, 21%, 11%);
+$VeryDarkDesaturatedBlue: hsl(235, 24%, 19%);
+$LightGrayishBlue: hsl(234, 39%, 85%);
+$LightGrayishBlueHover: hsl(236, 33%, 92%);
+$DarkGrayishBlue: hsl(234, 11%, 52%);
+$VeryDarkGrayishBlue: hsl(233, 14%, 35%);
+$VeryDarkGrayishBlue: hsl(237, 14%, 26%);
+
+
+//font
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap');
+$rubikFont: 'Josefin Sans', sans-serif;
+
+//font weight
+$fw-light: 400;
+$fw-regular: 500;
+$fw-bold: 700;
+
+//font sizes
+$fs-xs: 14px;
+$fs-sm: 18px;
+$fs-reg: 32px;
+
+//spacing
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 32px;
+
+//header height
+$headerHeightSm: 245px;
+$headerHeightMd: 250px;
+
+//breakpoints
+$sm: 640px;
+$md: 768px;
+$lg: 1024px;
+
+@mixin breakpoint($point) {
+    @if $point == sm {
+        @media(min-width: $sm) {
+            @content
+        }
+    }
+    @if $point == md {
+        @media(min-width: $md) {
+            @content
+        }
+    }
+    @if $point == lg {
+        @media(min-width: $lg) {
+            @content
+        }
+    }
+}

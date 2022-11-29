@@ -1,0 +1,91 @@
+@import '../../Styles/variables.scss';
+
+.header {
+    height: $headerHeightSm;
+    max-width: 1440px;
+    margin: 0 auto;
+
+    .container {
+        font-family: $rubikFont;
+        max-width: 600px;
+        margin: 0 auto;
+
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 60px 0 40px 0;
+            margin: 0 25px;
+
+            .logo {
+                font-weight: $fw-bold;
+                font-size: $fs-reg;
+                letter-spacing: 7px;
+                color: $white;
+            }
+        }
+
+
+        .form {
+            margin: 0 25px;
+            display: flex;
+    
+            input {
+                font-size: $fs-xs;
+                padding: 15px;
+                border-radius: 5px;
+                outline: none;
+                border: none;
+                width: 100%;
+                @include breakpoint(sm) {
+                    padding: 20px;
+                }
+            }
+
+            .error {
+                border-right: none;
+                box-shadow: inset 0px 0px 3px 3px $LightGrayishBlue;   
+            }
+        }
+    }
+}
+
+.light {
+    background: url('../../assets/bg-mobile-light.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    @include breakpoint(sm) {
+        height: $headerHeightMd;
+        background: url('../../assets/bg-desktop-light.jpg');
+    }
+
+    @include breakpoint(lg) {
+        height: $headerHeightMd;
+        margin-top: 30px;
+    }
+}
+.dark {
+    background: url('../../assets/bg-mobile-dark.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    @include breakpoint(sm) {
+        height: $headerHeightMd;
+        background: url('../../assets/bg-desktop-dark.jpg');
+    }
+
+    @include breakpoint(lg) {
+        height: $headerHeightMd;
+        margin-top: 30px;
+    }
+}
+
+.form_dark input {
+    background-color: $VeryDarkDesaturatedBlue;
+    color: $LightGrayishBlue;
+}
+
+.form_light input {
+    background-color: $VeryLightGray;
+}
