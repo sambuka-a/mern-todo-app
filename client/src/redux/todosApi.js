@@ -6,13 +6,14 @@ export const todosApi = createApi({
     baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:8000/'}),
     endpoints: (build) => ({
         getTodos: build.query({
-            query: () => `todos`,
+            query: (q) => `todos/${q}`,
             providesTags: (result) =>
                 result
                     ? [...result.map(({ id }) => ({ type: 'Todos', id })), 'Todos']
                     : ['Todos'],
             
         }),
+
         addTodos: build.mutation({
             query: (body) => ({
                 url: 'todos',
@@ -37,8 +38,16 @@ export const todosApi = createApi({
                 method: 'DELETE',
             }),
             invalidatesTags: ['Todos']
-        })
+        }),
+
+        deleteMultipleTodos: build.mutation({
+            query: () => ({
+                url: `todos`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['Todos']
+        }),
     })
 });
 
-export const {useGetTodosQuery, useAddTodosMutation, useToggleTodosMutation, useDeleteTodoMutation} = todosApi;
+export const {useGetTodosQuery, useAddTodosMutation, useToggleTodosMutation, useDeleteTodoMutation, useDeleteMultipleTodosMutation} = todosApi;

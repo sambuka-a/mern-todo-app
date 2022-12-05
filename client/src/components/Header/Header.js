@@ -7,7 +7,6 @@ import { ReactComponent as SunIcon } from '../../assets/icon-sun.svg'
 const Header = ({theme, themeSwitch}) => {
   const [value, setValue] = useState('')
   const [error, setError] = useState(false)
-  //const [theme, setTheme] = useState('light');
   const inputRef = useRef();
 
   const [addTodo] = useAddTodosMutation();
@@ -15,12 +14,6 @@ const Header = ({theme, themeSwitch}) => {
   useEffect(() => {
     inputRef.current.focus();
   }, [])
-
-  /*
-  const handleThemeChange = () => {
-    setTheme((theme === 'light' ? 'dark' : 'light'))
-  }
-  */
 
   const handleChange = (e) => {
     setValue(e.target.value)
@@ -31,7 +24,6 @@ const Header = ({theme, themeSwitch}) => {
     if(value) {
       await addTodo({
           text:value,
-          completed: false,
         }).unwrap();
       setValue('')
       setError(false)

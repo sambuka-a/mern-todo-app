@@ -5,6 +5,7 @@
     max-height: 100vh;
     margin: 0 auto;
     background-color: $VeryLightGray;
+    padding-bottom: 50px;
 }
 
 .card_dark {
@@ -12,62 +13,101 @@
     max-height: 100vh;
     margin: 0 auto;
     background-color: $VeryDarkBlue;
+    padding-bottom: 50px;
+}
+
+.spinner {
+    width: 200px;
+    height: 100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .container {
     max-width: 600px;
     margin: 0 auto;
-}
-
-.list {
-    border-radius: 5px;
-    position:relative;
-    top: -30px; 
-    margin: 0 25px;
     font-size: $fs-sm;
     font-family: $rubikFont;
-    box-shadow: $VeryDarkGrayishBlue 0px 2px 4px;
-    padding-inline-start: 0 !important;
-}
 
-li {
-    padding: 20px;
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid grey;
-}
+    .list {
+        border-radius: 5px;
+        position:relative;
+        top: -30px; 
+        margin: 0 25px;
+        box-shadow: $VeryDarkGrayishBlue 0px 2px 4px;
+        padding-inline-start: 0 !important;
 
-input[type="checkbox"] {
-    display: none;
-}
-input[type="checkbox"] + span {
-    display: inline-block;
-    position: relative;
-    top: -1px;
-    width: 24px;
-    height: 24px;
-    margin: -1px 0px 0 0;
-    vertical-align: middle;
-    border: 1px solid #ccc;
-    border-radius: 50%;
-    cursor: pointer;
-}
-input[type="checkbox"]:checked + span {
-    background: linear-gradient(125deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
-    //background: url('../../assets/icon-check.svg') no-repeat center;
-}
+        li {
+            padding: 20px;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid grey;
 
-input[type="checkbox"] + span {
-  margin-right: 4px;
-}
+            input[type="checkbox"] {
+                display: none;
+            }
+            input[type="checkbox"] + span {
+                display: inline-block;
+                position: relative;
+                top: -1px;
+                width: 24px;
+                height: 24px;
+                margin: -1px 0px 0 0;
+                vertical-align: middle;
+                border: 1px solid #ccc;
+                border-radius: 50%;
+                cursor: pointer;
+            }
+            input[type="checkbox"]:checked + span {
+                background: linear-gradient(125deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+                //background: url('../../assets/icon-check.svg') no-repeat center;
+            }
+            
+            input[type="checkbox"] + span {
+              margin-right: 4px;
+            }
 
-.list_dark {
-    background-color: $VeryDarkDesaturatedBlue;
-    color: $LightGrayishBlue;
-}
+            .checked {
+                text-decoration: line-through;
+                color: $DarkGrayishBlue;
+            }
+        }
 
-.list_light {
-    background-color: $white;
-    color: $VeryDarkGrayishBlue;
+        .listControls {
+            display: flex;
+            justify-content: space-between;
+            margin: 25px 25px 10px 25px;
+            padding-bottom: 20px;
+        
+            .clearList {
+                cursor: pointer;
+            }
+        }
+    }
+
+    .footer {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 25px;
+        padding: 25px;
+        box-shadow: $VeryDarkGrayishBlue 0px 2px 4px;
+        border-radius: 5px;
+    
+        .clearList {
+            cursor: pointer;
+        }
+    }
+
+    .list_dark {
+        background-color: $VeryDarkDesaturatedBlue;
+        color: $LightGrayishBlue;
+    }
+    
+    .list_light {
+        background-color: $white;
+        color: $VeryDarkGrayishBlue;
+    }
 }
