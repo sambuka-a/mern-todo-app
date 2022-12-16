@@ -3,20 +3,8 @@ import Todo from '../models/todoModel.js';
 
 //route /todos/q
 export const getTodos = asyncHandler(async (req, res) => {
-
-    if(req.params.q === "all") {
-        const todos = await Todo.find()
-        res.status(200).json(todos)
-
-    } if(req.params.q === "completed") {
-        const todos = await Todo.find({"completed": true})
-        res.status(200).json(todos)
-
-    } else if(req.params.q === "active") {
-        const todos = await Todo.find({"completed": false})
-        res.status(200).json(todos)
-    }
-    
+    const todos = await Todo.find()
+    res.status(200).json(todos)    
 })
 
 //route /todos

@@ -18,7 +18,7 @@
 
 .spinner {
     width: 200px;
-    height: 100px;
+    height: 50px;
     margin: 0 auto;
     display: flex;
     justify-content: center;
@@ -85,6 +85,16 @@
             .clearList {
                 cursor: pointer;
             }
+
+            .controls {
+                display: none;
+
+                @include breakpoint(sm) {
+                    display: flex;
+                    justify-content: space-between;
+                    width: 200px;
+                }
+            }
         }
     }
 
@@ -99,6 +109,10 @@
         .clearList {
             cursor: pointer;
         }
+
+        @include breakpoint(sm) {
+            display: none;
+        }
     }
 
     .list_dark {
@@ -111,3 +125,4 @@
         color: $VeryDarkGrayishBlue;
     }
 }
+
