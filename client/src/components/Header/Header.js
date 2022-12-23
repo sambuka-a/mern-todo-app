@@ -33,7 +33,7 @@ const Header = ({theme, themeSwitch}) => {
   }
 
   return (
-    <div className={(theme === 'light' ? `${styles.header} ${styles.light}` : `${styles.header} ${styles.dark}`)}>
+    <div className={theme ? `${styles.header} ${styles.light}` : `${styles.header} ${styles.dark}`}>
       <div className={ styles.container}>
         <div className={styles.hero}>
           <div className={styles.logo}>TODO</div>
@@ -45,7 +45,7 @@ const Header = ({theme, themeSwitch}) => {
           </div>
         </div>
         <div>
-          <form className={(theme === 'light' ? `${styles.form} ${styles.form_light}` : `${styles.form} ${styles.form_dark}`)} onSubmit={handleSubmit}>
+          <form className={theme ? `${styles.form} ${styles.form_light}` : `${styles.form} ${styles.form_dark}`} onSubmit={handleSubmit}>
             <input className={error ? styles.error : ''}
               ref={inputRef}
               onChange={handleChange} 

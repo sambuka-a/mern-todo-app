@@ -1,7 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import Todo from '../models/todoModel.js';
 
-//route /todos/q
+//route /todos
 export const getTodos = asyncHandler(async (req, res) => {
     const todos = await Todo.find()
     res.status(200).json(todos)    
@@ -35,15 +35,10 @@ export const modifyTodos = asyncHandler(async (req, res) => {
     res.status(200).json(updatedTodo)
 })
 
-//route /todos/
-export const deleteMultipleTodos = asyncHandler(async (req, res) => {
-    const todos = await Todo.deleteMany({"completed": true});
-    res.status(200).json({id: req.body.id})
-})
-
 //route /todos/id
 export const deleteTodos = asyncHandler(async (req, res) => {
     const todo = await Todo.findById(req.params.id)
+
     if(!todo) {
         res.status(400)
         throw new Error('Todo not found')
@@ -52,16 +47,8 @@ export const deleteTodos = asyncHandler(async (req, res) => {
     res.status(200).json({id: req.params.id})
 })
 
-/*
-
 //route /todos/
 export const deleteMultipleTodos = asyncHandler(async (req, res) => {
-    if(!req.body.id) {
-        res.status(400)
-        throw new Error('Nothing to delete')
-    }
-    await Todo.deleteMany({"completed": {$in: req.body.id}});
+    const todos = await Todo.deleteMany({"completed": true});
     res.status(200).json({id: req.body.id})
 })
-
-*/

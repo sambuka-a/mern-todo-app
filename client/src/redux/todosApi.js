@@ -6,7 +6,7 @@ export const todosApi = createApi({
     baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:8000/'}),
     endpoints: (build) => ({
         getTodos: build.query({
-            query: () => `todos`,
+            query: () => `todos` ,
             providesTags: (result) =>
                 result
                     ? [...result.map(({ id }) => ({ type: 'Todos', id })), 'Todos']

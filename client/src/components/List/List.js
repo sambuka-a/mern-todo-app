@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useGetTodosQuery, useToggleTodosMutation, useDeleteTodoMutation, useDeleteMultipleTodosMutation } from "../../redux/todosApi";
 import { ReactComponent as DelButton } from '../../assets/icon-cross.svg'
 import PropagateLoader from "react-spinners/PropagateLoader";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 import styles from './List.module.scss'
 
@@ -9,9 +11,9 @@ import styles from './List.module.scss'
 const List = ({theme}) => {
     const [todoData, setTodoData] = useState([])
     const {data = [], isLoading, isError} = useGetTodosQuery();
-    const [toggleTodo, {isLoading: isUpdating}] = useToggleTodosMutation();
-    const [deleteTodo, {isLoading: isDeleting}] = useDeleteTodoMutation();
-    const [deleteMultipleTodos, {isLoading: isDeletingMultiple}] = useDeleteMultipleTodosMutation();
+    const [toggleTodo] = useToggleTodosMutation();
+    const [deleteTodo] = useDeleteTodoMutation();
+    const [deleteMultipleTodos] = useDeleteMultipleTodosMutation();
 
     useEffect(() => {
         if(data) {
@@ -22,15 +24,27 @@ const List = ({theme}) => {
     let pendingTodosLength = data.filter(i => !i.completed).length;
 
     const handleToggleTodo = async (id, status) => {
-        await toggleTodo({id, status}).unwrap();
+
+        await toggleTodo({id, status}).unwrap()
+        .catch((err) => {
+            toast(err.data.message);
+        })
     } 
 
     const handleDeleteTodo = async (id) => {
-      await deleteTodo(id).unwrap();
+
+      await deleteTodo(id).unwrap()
+        .catch((err) => {
+            toast(err.data.message);
+        })
     }
 
     const handleDeleteCompleted = async () => {
-        await deleteMultipleTodos().unwrap();
+
+        await deleteMultipleTodos().unwrap()
+        .catch((err) => {
+            toast(err.data.message);
+        })
     }
 
     const handleFilter = (param) => {
@@ -48,7 +62,9 @@ const List = ({theme}) => {
     }
 
   return (
-    <div className={(theme === 'light' ? `${styles.card}` : `${styles.card_dark}`)}>
+    <>
+        <ToastContainer/>
+        <div className={theme ? `${styles.card}` : `${styles.card_dark}`}>
         {isLoading && (<div className={styles.spinner}>
             <PropagateLoader 
                 color="#4d5066"
@@ -57,16 +73,18 @@ const List = ({theme}) => {
         </div>)}
         {(!isLoading && !isError) && (
             <div className={styles.container}>
-            <ul className={(theme === 'light' ? `${styles.list} ${styles.list_light}` : `${styles.list} ${styles.list_dark}`)}>
+            <ul className={theme ? `${styles.list} ${styles.list_light}` : `${styles.list} ${styles.list_dark}`}>
                 {(!isLoading && !data.length) && <li>Oops. No items here</li>}
                 {todoData.map(i => (
                     <li key = {i._id}>
                         <div className={styles.listLeft}>
-                            <span onClick={() => handleToggleTodo(i._id, i.completed)}>
-                                <input onChange={() =>{}} type='checkbox' id={i._id} checked={i.completed}/>
-                            <span></span>
-                            </span>
-                            <span className={i.completed && `${styles.checked}`}>{i.text}</span>
+                            <input 
+                                onChange={() => handleToggleTodo(i._id, i.completed)} 
+                                type='checkbox' 
+                                id={i._id} 
+                                checked={i.completed}
+                            />
+                            <label htmlFor={i._id}> {i.text}</label>
                         </div>
                         <div className={styles.listRight}>
                             <DelButton onClick={() => handleDeleteTodo(i._id)}/>
@@ -74,10 +92,10 @@ const List = ({theme}) => {
                     </li>
                 ))}
                 <div className={styles.listControls}>
-                    <div>
+                    <div className={styles.listControlsItems}>
                         <span>{pendingTodosLength === 1 ? `1 Item left` : `${pendingTodosLength} items left`}</span>
                     </div>
-                    <div className={(theme === 'light' ? `${styles.controls} ${styles.list_light}` : `${styles.controls} ${styles.list_dark}`)}>
+                    <div className={theme ? `${styles.controls} ${styles.list_light}` : `${styles.controls} ${styles.list_dark}`}>
                         <span className={styles.clearList} onClick={() => handleFilter('all')}>All</span>
                         <span className={styles.clearList} onClick={() => handleFilter('active')}>Active</span>
                         <span className={styles.clearList} onClick={() => handleFilter('completed')}>Completed</span>
@@ -87,20 +105,15 @@ const List = ({theme}) => {
                     </div>
                 </div>
             </ul>
-            <div className={(theme === 'light' ? `${styles.footer} ${styles.list_light}` : `${styles.footer} ${styles.list_dark}`)}>
+            <div className={theme ? `${styles.footer} ${styles.list_light}` : `${styles.footer} ${styles.list_dark}`}>
                 <span className={styles.clearList} onClick={() => handleFilter('all')}>All</span>
                 <span className={styles.clearList} onClick={() => handleFilter('active')}>Active</span>
                 <span className={styles.clearList} onClick={() => handleFilter('completed')}>Completed</span>
             </div>
-            {(isUpdating || isDeleting || isDeletingMultiple) && (<div className={styles.spinner}>
-            <PropagateLoader 
-                color="#4d5066"
-                size={6}
-            />
-            </div>)}
         </div>
         )}
     </div>
+    </>
   )
 }
 
