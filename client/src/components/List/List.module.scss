@@ -2,18 +2,36 @@
 
 .card {
     max-width: 1440px;
-    max-height: 100vh;
+    height: calc(100vh - 245px);
     margin: 0 auto;
     background-color: $VeryLightGray;
     padding-bottom: 50px;
+
+    @include breakpoint(sm) {
+        height: calc(100vh - 250px);
+    }
+
+    @include breakpoint(lg) {
+        height: calc(100vh - 310px);
+        margin-bottom: 20px;
+    }
 }
 
 .card_dark {
     max-width: 1440px;
-    max-height: 100vh;
+    height: calc(100vh - 245px);
     margin: 0 auto;
     background-color: $VeryDarkBlue;
     padding-bottom: 50px;
+
+    @include breakpoint(sm) {
+        height: calc(100vh - 250px);
+    }
+
+    @include breakpoint(lg) {
+        height: calc(100vh - 310px);
+        margin-bottom: 20px;
+    }
 }
 
 .spinner {
